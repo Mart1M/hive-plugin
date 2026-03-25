@@ -204,7 +204,3 @@ All hubs read from and write to a shared JSON state. Each hub writes only to its
 ## HIVE in Your Project
 
 HIVE is designed to be a **readable, interpretable structure** — not a black-box runtime. Every file in `.hive/` is a markdown or JSON document that Claude can read, follow, and act upon. You customize the agents, skills, and rules to match your project's reality.
-
-**Checklist:** Use [hive_system_documentation.md](hive_system_documentation.md) **§17 — Checklist d’implémentation** when standing up HIVE in a new repo (use case, hubs, state schema, skills, verify, deliver, governance).
-
-For the full narrative and examples, see the rest of [hive_system_documentation.md](hive_system_documentation.md).
