@@ -29,6 +29,24 @@ HIVE is simultaneously:
 
 Each **hub** is the single center of responsibility for its stage; **agents** inside it are specialized spokes that feed consolidated outputs into that hub’s section of shared state. That keeps orchestration readable and avoids muddy boundaries between stages.
 
+```mermaid
+flowchart TB
+  subgraph oneHub [Each of the five hubs follows this pattern]
+    direction TB
+    spokeA[Agent spoke]
+    spokeB[Agent spoke]
+    spokeC[Agent spoke]
+    hubCore((Hub))
+    stateSlice["state section e.g. state.ground"]
+    spokeA --> hubCore
+    spokeB --> hubCore
+    spokeC --> hubCore
+    hubCore --> stateSlice
+  end
+```
+
+Agents do not hand off arbitrarily to each other: they contribute **through** the hub, which merges their outputs and writes **only** to its slice of the shared state.
+
 ### Claude Code as an interpretable layer
 
 In Claude Code, HIVE is not required to be a separate runtime. The plugin supplies **`CLAUDE.md`** and slash commands so the model reads and executes the **markdown and JSON** under `.hive/` (`hive.config.json`, `state.schema.json`, orchestrator and hub definitions, skills registry, rules). The canonical source for rollout order and governance checks is the implementation checklist in **`hive_system_documentation.md` (section 17)**.
@@ -98,7 +116,7 @@ Some environments (e.g. Cursor) may expose the same prompts as `/hive-init`, `/h
 
 ### 1. Install the plugin (private marketplace — not the Anthropic store)
 
-This repo ships a **local marketplace** under [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). Marketplace id: **`hive-framework`**. Plugin id: **`hive`**.
+This repo is a **marketplace repo**: the catalog is [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) at the root; the installable plugin lives in [`plugins/hive/`](plugins/hive/) (Claude Code rejects `source: "."` — the path must be a real subfolder like `./plugins/hive`). Marketplace id: **`hive-framework`**. Plugin id: **`hive`**.
 
 **From a local clone** (adjust the path):
 
@@ -120,9 +138,19 @@ Equivalent HTTPS URL if needed: `https://github.com/Mart1M/hive-plugin`.
 
 Use **`/plugin`** → Discover / Marketplaces to pick **user**, **project**, or **local** [install scope](https://code.claude.com/docs/en/discover-plugins#install-plugins) as needed. To refresh the catalog after a git pull: `/plugin marketplace update hive-framework`.
 
-**Dry-run without marketplace:** `claude --plugin-dir /path/to/hive-plugin` (see [Create plugins](https://code.claude.com/docs/en/plugins)).
+If you already added this repo **before** the `plugins/hive` layout, remove that marketplace entry, then add again (cached copy may still have invalid `source`):
 
-`settings.json` at the repo root is mainly for editors that expect it; **Claude Code** reads [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json). Keep **[`CLAUDE.md`](CLAUDE.md)** in repo for HIVE rules — add it to your project’s rules or open it from the installed plugin copy if your setup does not inject it automatically.
+```text
+/plugin marketplace list
+/plugin marketplace remove hive-framework
+/plugin marketplace add Mart1M/hive-plugin
+```
+
+If your CLI shows a different marketplace id, use the name from **`list`** in `remove`.
+
+**Dry-run without marketplace:** `claude --plugin-dir /path/to/hive-plugin/plugins/hive` (see [Create plugins](https://code.claude.com/docs/en/plugins)).
+
+**Claude Code** reads the manifest at [`plugins/hive/.claude-plugin/plugin.json`](plugins/hive/.claude-plugin/plugin.json). [`plugins/hive/settings.json`](plugins/hive/settings.json) is mainly for editors; keep [`plugins/hive/CLAUDE.md`](plugins/hive/CLAUDE.md) for HIVE rules — add it to your project’s rules or open it from the installed plugin copy if needed.
 
 ### 2. Scaffold HIVE in your project
 

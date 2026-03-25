@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "hive",
-      "source": ".",
+      "source": "./plugins/hive",
       "description": "Scaffold and run HIVE: verified execution, structured shared state, five hubs (Intent, Ground, Compose, Verify, Deliver).",
       "version": "1.0.0",
       "author": {
