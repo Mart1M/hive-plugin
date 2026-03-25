@@ -1,0 +1,15 @@
+{
+  "name": "hive",
+  "version": "1.0.0",
+  "description": "Scaffold and run HIVE (Hub-based Intelligence & Verified Execution): verified execution, structured shared state, and an interpretable .hive/ layer for Claude Code. Five hubs — Intent, Ground, Compose, Verify, Deliver — with explicit orchestration.",
+  "author": {
+    "name": "HIVE Framework"
+  },
+  "keywords": [
+    "architecture",
+    "agentic",
+    "orchestration",
+    "design-system",
+    "framework"
+  ]
+}

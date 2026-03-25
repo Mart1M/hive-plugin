@@ -1,0 +1,53 @@
+{
+  "name": "hive",
+  "displayName": "HIVE — Hub-based Intelligence & Verified Execution",
+  "version": "1.0.0",
+  "description": "Scaffold and run HIVE (Hub-based Intelligence & Verified Execution): verified execution, structured shared state, and an interpretable .hive/ layer for Claude Code. Five hubs — Intent, Ground, Compose, Verify, Deliver — with explicit orchestration.",
+  "author": "HIVE Framework",
+  "commands": [
+    {
+      "name": "hive-init",
+      "description": "Scaffold the full .hive/ directory structure in the current project",
+      "file": "commands/hive-init.md"
+    },
+    {
+      "name": "hive-run",
+      "description": "Run the full HIVE pipeline (Intent → Ground → Compose → Verify → Deliver)",
+      "file": "commands/hive-run.md"
+    },
+    {
+      "name": "hive-intent",
+      "description": "Run the Intent Hub in isolation — parse a raw request into structured intention",
+      "file": "commands/hive-intent.md"
+    },
+    {
+      "name": "hive-ground",
+      "description": "Run the Ground Hub in isolation — gather knowledge before composition",
+      "file": "commands/hive-ground.md"
+    },
+    {
+      "name": "hive-compose",
+      "description": "Run the Compose Hub in isolation — build a structured solution from intent + ground",
+      "file": "commands/hive-compose.md"
+    },
+    {
+      "name": "hive-verify",
+      "description": "Run the Verify Hub in isolation — validate the composition before delivery",
+      "file": "commands/hive-verify.md"
+    },
+    {
+      "name": "hive-deliver",
+      "description": "Run the Deliver Hub in isolation — produce code, specs, or docs from the verified blueprint",
+      "file": "commands/hive-deliver.md"
+    },
+    {
+      "name": "hive-status",
+      "description": "Display the current HIVE pipeline state for the active session",
+      "file": "commands/hive-status.md"
+    }
+  ],
+  "context": {
+    "systemPrompt": "CLAUDE.md"
+  },
+  "tags": ["architecture", "agentic", "orchestration", "design-system", "framework"]
+}
