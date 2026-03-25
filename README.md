@@ -27,7 +27,35 @@ HIVE is simultaneously:
 
 ### Hub-and-spoke
 
-Each **hub** is the single center of responsibility for its stage; **agents** inside it are specialized spokes that feed consolidated outputs into that hub’s section of shared state. That keeps orchestration readable and avoids muddy boundaries between stages.
+At **global** level, the **Main Orchestrator** drives the pipeline: it decides when each hub runs and updates the shared state. At **local** level, inside each hub, **agents** act as spokes that feed the hub, which writes **one** section of that state.
+
+**Global view — from Main Orchestrator to hubs**
+
+```mermaid
+flowchart TB
+  trig[User or trigger]
+  main[Main Orchestrator]
+  hIntent[Intent Hub]
+  hGround[Ground Hub]
+  hCompose[Compose Hub]
+  hVerify[Verify Hub]
+  hDeliver[Deliver Hub]
+  mem[("Shared JSON state")]
+  fin[Final output]
+  trig --> main
+  main --> hIntent
+  hIntent --> hGround --> hCompose --> hVerify --> hDeliver
+  hDeliver --> fin
+  hIntent -.->|state.intent| mem
+  hGround -.->|state.ground| mem
+  hCompose -.->|state.compose| mem
+  hVerify -.->|state.verify| mem
+  hDeliver -.->|state.deliver| mem
+```
+
+The orchestrator stays **thin**: it owns sequencing and transitions, not hub-internal reasoning.
+
+**Inside one hub — agents as spokes**
 
 ```mermaid
 flowchart TB
@@ -55,18 +83,7 @@ In Claude Code, HIVE is not required to be a separate runtime. The plugin suppli
 
 ## Architecture Overview
 
-```
-User / Trigger
-   ↓
-Main Orchestrator
-   ├─ Intent Hub    → Understand the raw request
-   ├─ Ground Hub    → Gather all necessary knowledge
-   ├─ Compose Hub   → Build a structured solution
-   ├─ Verify Hub    → Validate before delivery
-   └─ Deliver Hub   → Produce the actionable artifact
-         ↓
-      Final Output
-```
+See the **Global view** diagram in [Hub-and-spoke](#hub-and-spoke): **Main Orchestrator →** Intent → Ground → Compose → Verify → Deliver, each hub reading/writing its part of the shared state.
 
 The canonical flow is: **Intent → Ground → Compose → Verify → Deliver**
 
