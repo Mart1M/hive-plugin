@@ -2,6 +2,8 @@
 
 **Hub-based Intelligence & Verified Execution**
 
+Repository: [github.com/Mart1M/hive-plugin](https://github.com/Mart1M/hive-plugin)
+
 HIVE is an agentic architecture framework that structures AI systems around **specialized hubs**, a **central orchestrator**, a **shared state**, and a **verify-before-execute** philosophy.
 
 ---
@@ -106,13 +108,15 @@ This repo ships a **local marketplace** under [`.claude-plugin/marketplace.json`
 /reload-plugins
 ```
 
-**From GitHub** (after you push this repo):
+**From GitHub** (public repo):
 
 ```text
-/plugin marketplace add your-org/hive-plugin
+/plugin marketplace add Mart1M/hive-plugin
 /plugin install hive@hive-framework
 /reload-plugins
 ```
+
+Equivalent HTTPS URL if needed: `https://github.com/Mart1M/hive-plugin`.
 
 Use **`/plugin`** → Discover / Marketplaces to pick **user**, **project**, or **local** [install scope](https://code.claude.com/docs/en/discover-plugins#install-plugins) as needed. To refresh the catalog after a git pull: `/plugin marketplace update hive-framework`.
 

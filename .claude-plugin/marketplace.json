@@ -1,7 +1,7 @@
 {
   "name": "hive-framework",
   "owner": {
-    "name": "HIVE Framework"
+    "name": "Mart1M"
   },
   "metadata": {
     "description": "Non-official marketplace for the HIVE plugin. Add this source in Claude Code, then install the hive plugin. Not affiliated with Anthropic."
@@ -13,8 +13,9 @@
       "description": "Scaffold and run HIVE: verified execution, structured shared state, five hubs (Intent, Ground, Compose, Verify, Deliver).",
       "version": "1.0.0",
       "author": {
-        "name": "HIVE Framework"
-      }
+        "name": "Mart1M"
+      },
+      "homepage": "https://github.com/Mart1M/hive-plugin"
     }
   ]
 }

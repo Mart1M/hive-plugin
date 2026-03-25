@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Scaffold and run HIVE (Hub-based Intelligence & Verified Execution): verified execution, structured shared state, and an interpretable .hive/ layer for Claude Code. Five hubs — Intent, Ground, Compose, Verify, Deliver — with explicit orchestration.",
   "author": {
-    "name": "HIVE Framework"
+    "name": "Mart1M",
+    "url": "https://github.com/Mart1M"
   },
+  "homepage": "https://github.com/Mart1M/hive-plugin",
+  "repository": "https://github.com/Mart1M/hive-plugin",
   "keywords": [
     "architecture",
     "agentic",
